@@ -39,4 +39,5 @@
   <text language="380" description="Проста рутина видобутку для кораблів гравця в Секторі, керована «Повторюваними Наказами»."></text>
   <dependency version="760"></dependency>
   <dependency id="ws_2042901274" optional="false" name="SirNukes Mod Support APIs" version="193"></dependency>
+  <dependency id="ws_3599279973" optional="false" name="Mimic Repeat Orders" version="110"></dependency>
 </content>
