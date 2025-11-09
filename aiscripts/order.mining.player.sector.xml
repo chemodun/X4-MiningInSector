@@ -144,7 +144,7 @@
       <remove_value name="$resourceprobes" />
 
       <do_if value="$targetPos? and @$targetPos != null">
-        <set_value name="$distance" exact="[this.assignedcontrolled.currentradarrange, $targetSector.sector.coresize].max" />
+        <set_value name="$distance" exact="[this.assignedcontrolled.currentradarrange, $targetSector.coresize].max" />
         <do_if value="this.isplayerowned and this.assignedcontrolled.attention ge attention.visible and $ware.hastag.mineral">
           <find_asteroid_in_cluster name="$closestAsteroid" cluster="$targetSector.cluster" refobject="this.assignedcontrolled" canpickup="false"
             maxdistance="$distance" ware="$ware" />
