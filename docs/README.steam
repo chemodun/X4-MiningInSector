@@ -7,10 +7,10 @@ Simple mining routine for player owned ships in sector to be managed by Repeat O
 [*] Simple gathering of resources in the desired sector.
 [*] Can't be initiated out of Repeat Orders.
 [*] Mimic behavior is not mandatory, but [b]Mimic Repeat Orders[/b] mod is required.
-[*] Works only for player owned ships.
 [/list]
 [h2][b]Limitations[/b][/h2]
 [list]
+[*] Works only for player owned ships.
 [*] Can't be initiated out of Repeat Orders.
 [/list]
 [h2][b]Requirements[/b][/h2]
@@ -29,8 +29,8 @@ Simple mining routine for player owned ships in sector to be managed by Repeat O
 [/list]
 [h2][b]Installation[/b][/h2]
 
-You can download the latest version via Steam client - [url=https://steamcommunity.com/sharedfiles/filedetails/?id=]Mining in Sector for Mimic Repeat Orders[/url]
-Or you can do it via the Nexus Mods - [url=https://www.nexusmods.com/x4foundations/mods/]Mining in Sector for Mimic Repeat Orders[/url]
+You can download the latest version via Steam client - [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3602563805]Mining in Sector for Mimic Repeat Orders[/url]
+Or you can do it via the Nexus Mods - [url=https://www.nexusmods.com/x4foundations/mods/1880]Mining in Sector for Mimic Repeat Orders[/url]
 
 [h2][b]Usage[/b][/h2]
 
@@ -54,8 +54,8 @@ When you right-click on a sector in the map view, you will see the context menu 
 
 [h2][b]Video[/b][/h2]
 
-Video demonstration of the Mimic Repeat Orders. Version 1.00
-[previewyoutube=6pT75XC8MUs;full][/previewyoutube]
+Video demonstration of the Mining in Sector for Mimic Repeat Orders. Version 1.00
+[previewyoutube=hfOSsG4Q6Ck;full][/previewyoutube]
 
 [h2][b]Credits[/b][/h2]
 [list]
