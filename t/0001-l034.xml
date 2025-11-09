@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Spanish -->
+<diff>
+  <add sel="/language">
+    <page id="1972092409" voice="no" title="Minería en el Sector" descr="Texto para el script de IA MiningPlayerSector">
+      <t id="1">Minería en el Sector</t>
+      <t id="2">Rutina de minería simple para naves propiedad del jugador en un sector, utilizada por {1001, 11267}</t>
+      <t id="1001">En el Sector: %s</t>
+      <t id="1002">Extrayendo %s en el Sector %s, gestionado por {1001, 11267}</t>
+    </page>
+  </add>
+</diff>

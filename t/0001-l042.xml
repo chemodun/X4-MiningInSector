@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Czech -->
+<diff>
+  <add sel="/language">
+    <page id="1972092409" voice="no" title="Těžba v Sektoru" descr="Text pro skript AI MiningPlayerSector">
+      <t id="1">Těžba v Sektoru</t>
+      <t id="2">Jednoduchá těžební rutina pro lodě ve vlastnictví hráče v sektoru, používaná skriptem {1001, 11267}</t>
+      <t id="1001">V Sektoru: %s</t>
+      <t id="1002">Těžba %s v Sektoru %s, spravovaná {1001, 11267}</t>
+    </page>
+  </add>
+</diff>

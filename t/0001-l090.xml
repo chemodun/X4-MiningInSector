@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Turkish -->
+<diff>
+  <add sel="/language">
+    <page id="1972092409" voice="no" title="Sektör Madenciliği" descr="MiningPlayerSector AI betiği için metin">
+      <t id="1">Sektörde Madencilik</t>
+      <t id="2">Oyuncuya ait gemiler için sektörde kullanılan basit madencilik rutini; {1001, 11267} tarafından kullanılır</t>
+      <t id="1001">Sektörde: %s</t>
+      <t id="1002">%s madenciliği %s Sektöründe, {1001, 11267} tarafından yönetiliyor</t>
+    </page>
+  </add>
+</diff>

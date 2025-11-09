@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- French -->
+<diff>
+  <add sel="/language">
+    <page id="1972092409" voice="no" title="Exploitation Secteur" descr="Texte pour le script IA MiningPlayerSector">
+      <t id="1">Extraction dans le Secteur</t>
+      <t id="2">Routine minière simple pour les vaisseaux appartenant au joueur dans un secteur, utilisée par {1001, 11267}</t>
+      <t id="1001">Dans le Secteur : %s</t>
+      <t id="1002">Extraction de %s dans le Secteur %s, gérée par {1001, 11267}</t>
+    </page>
+  </add>
+</diff>

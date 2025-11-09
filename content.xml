@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content
+  id=""
+  name="Mining in Sector for Mimic Repeat Orders"
+  author="Chem O`Dun"
+  version="100"
+  date="2025-11-08"
+  save="false"
+  description="Simple mining routine for player owned ships in sector to be managed by Repeat Orders"
+>
+  <text language="7" description="The impossible is possible: use the Mimic behavior for Repeat Orders."></text>
+  <!-- French -->
+  <text language="33" description="L'impossible devient possible : utilisez le comportement Imitation pour les Ordres Répétés."></text>
+  <!-- Spanish -->
+  <text language="34" description="Lo imposible es posible: usa el comportamiento Imitar para Órdenes Repetidas."></text>
+  <!-- Italian -->
+  <text language="39" description="L'impossibile diventa possibile: usa il comportamento Imitare per Ordini Ripetuti."></text>
+  <!-- Czech -->
+  <text language="42" description="Nemožné se stává možným: použijte chování Nápodoba pro Opakované Příkazy."></text>
+  <!-- English -->
+  <text language="44" description="The impossible is possible: use the Mimic behavior for Repeat Orders."></text>
+  <!-- Polish -->
+  <text language="48" description="Niemożliwe staje się możliwe: użyj zachowania Naśladuj dla Powtarzanych Poleceń."></text>
+  <!-- German -->
+  <text language="49" description="Das Unmögliche wird möglich: Verwende das Verhalten Nachahmen für Wiederholte Befehle."></text>
+  <!-- Portuguese -->
+  <text language="55" description="O impossível torna-se possível: use o comportamento Imitar para Ordens Repetidas."></text>
+  <!-- Japanese -->
+  <text language="81" description="不可能が可能になる――模倣行動を繰り返し命令に活用しましょう。"></text>
+  <!-- Korean -->
+  <text language="82" description="불가능이 가능해집니다: 반복 명령을 위해 모방 동작을 사용하세요."></text>
+  <!-- Chinese -->
+  <text language="86" description="让不可能成为可能：为重复指令使用模仿行为。"></text>
+  <!-- Bengali -->
+  <text language="88" description="অসম্ভবও সম্ভব হয়: পুনরাবৃত্ত আদেশের জন্য অনুকরণ আচরণ ব্যবহার করুন।"></text>
+  <!-- Turkish -->
+  <text language="90" description="İmkânsız mümkün oluyor: Tekrarlanan Emirler için Taklit davranışını kullanın."></text>
+  <!-- Ukrainian -->
+  <text language="380" description="Неможливе стає можливим: використовуйте поведінку «Імітація» для «Повторюваних Наказів»."></text>
+  <dependency version="760"></dependency>
+  <dependency id="ws_2042901274" optional="false" name="SirNukes Mod Support APIs" version="193"></dependency>
+</content>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Korean -->
+<diff>
+  <add sel="/language">
+    <page id="1972092409" voice="no" title="섹터 채굴" descr="MiningPlayerSector AI 스크립트용 텍스트">
+      <t id="1">섹터 채굴</t>
+      <t id="2">플레이어 소유 함선이 섹터에서 사용하는 간단한 채굴 루틴으로, {1001, 11267}에서 사용됩니다</t>
+      <t id="1001">섹터: %s</t>
+      <t id="1002">섹터 %s에서 %s을(를) 채굴 중이며, {1001, 11267}이 관리합니다</t>
+    </page>
+  </add>
+</diff>

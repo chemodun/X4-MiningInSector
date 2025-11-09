@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Japanese -->
+<diff>
+  <add sel="/language">
+    <page id="1972092409" voice="no" title="セクター採掘" descr="MiningPlayerSector AI 用テキスト">
+      <t id="1">セクター採掘</t>
+      <t id="2">プレイヤー所有船がセクター内で使用する簡易採掘ルーチン。使用元: {1001, 11267}</t>
+      <t id="1001">セクター: %s</t>
+      <t id="1002">セクター %s で %s を採掘中、{1001, 11267} が管理</t>
+    </page>
+  </add>
+</diff>

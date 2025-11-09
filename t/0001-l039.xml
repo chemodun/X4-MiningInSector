@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Italian -->
+<diff>
+  <add sel="/language">
+    <page id="1972092409" voice="no" title="Estrazione nel Settore" descr="Testo per lo script IA MiningPlayerSector">
+      <t id="1">Estrazione nel Settore</t>
+      <t id="2">Routine di estrazione semplice per le navi di proprietà del giocatore nel settore da usare con {1001, 11267}</t>
+      <t id="1001">Nel Settore: %s</t>
+      <t id="1002">Estrazione di %s nel Settore %s, gestita da {1001, 11267}</t>
+    </page>
+  </add>
+</diff>

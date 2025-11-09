@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aiscript name="order.mining.player.sector" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="aiscripts.xsd" priority="2"
+  version="1">
+  <!--
+  Wrapper script for player mining in sector, starting mining.collect.ship
+  -->
+  <order id="MiningPlayerSector" name="{1972092409, 1}" description="{1972092409, 2}" category="mining" allowinloop="true">
+    <params>
+      <param name="location" required="true" type="sector" text="{1001, 2943}" comment="Destination. Sector to mine in." />
+      <param name="ware" required="true" type="ware" text="{1041, 10144}" comment="Ware. Ware to mine.">
+        <input_param name="cancarry" value="this.assignedcontrolled" />
+        <input_param name="isminable" value="true" />
+      </param>
+      <param name="debugchance" type="bool" default="0" advanced="true" text="{1041, 10086}" comment="Print debug output">
+        <input_param name="truevalue" value="100" />
+      </param>
+    </params>
+    <skill min="20" />
+    <requires primarypurpose="purpose.mine" />
+    <location object="$location" position="$targetPos" condition="@$targetPos != null" />
+  </order>
+  <interrupts>
+    <handler ref="AttackHandler" />
+    <handler ref="MissileLockHandler" />
+    <handler ref="ScannedHandler" />
+    <handler ref="InspectedHandler" />
+    <handler ref="FoundAbandonedHandler" />
+    <handler ref="FoundLockboxHandler" />
+    <handler ref="ResupplyHandler" />
+    <handler ref="SectorChangeHandler" />
+    <handler ref="TideHandler" />
+  </interrupts>
+  <init>
+    <set_value name="$targetSector" exact="$location" />
+    <set_value name="$targetPos" exact="null" />
+
+    <set_command command="command.freemining" />
+  </init>
+  <attention min="unknown">
+    <actions>
+      <do_if value="not this.assignedcontrolled.cargo.{$ware}.free">
+        <wait min="2s" max="5s" />
+        <do_if value="@this.assignedcontrolled.order.isrunning">
+          <set_order_failed order="this.assignedcontrolled.order" text="{1045, 115}" comment="Not enough space in cargo hold." />
+        </do_if>
+        <debug_text text="'MiningPlayerSector [%s]: Cargo hold is full. Aborting.'.[this.assignedcontrolled.debugname]" chance="100" filter="scripts" />
+        <resume label="cleanup" />
+      </do_if>
+
+      <do_if value="this.sector != $targetSector">
+
+        <get_jump_path component="$jumpPath" multiple="true" uselocalhighways="true" refobject="this.assignedcontrolled"
+          useknownpath="this.isplayerowned">
+          <start object="this.assignedcontrolled" />
+          <end object="$targetSector" />
+        </get_jump_path>
+
+        <do_if value="$jumpPath.count lt 2">
+          <debug_text
+            text="'MiningPlayerSector [%s]: ERROR: we are not at the target sector, but no jump path found from %s to %s. Aborting.'.
+            [
+              this.assignedcontrolled.debugname,
+              this.sector.knownname,
+              $targetSector.knownname,
+            ]" />
+          <resume label="cleanup" />
+        </do_if>
+
+        <do_if value="@$jumpPath.last.zone != null">
+          <set_value name="$targetLocation" exact="$jumpPath.last.zone" />
+        </do_if>
+        <do_else>
+          <find_zone name="$targetLocation" space="targetSector" normalzone="true" sortbydistanceto="$jumpPath.last" />
+        </do_else>
+
+        <get_safe_pos result="$targetPos" zone="$targetLocation" radius="this.assignedcontrolled.size" min="1km" max="5km" object="$jumpPath.last" />
+
+        <remove_value name="$jumpPath" />
+
+        <run_script name="'move.generic'" result="$movesuccess">
+          <param name="destination" value="$targetLocation" />
+          <param name="position" value="$targetPos" />
+          <!--<param
+          name="endintargetzone" value="true"/>-->
+          <param name="debugchance" value="$debugchance" />
+        </run_script>
+        <do_if value="not $movesuccess">
+          <do_if value="@this.assignedcontrolled.order.isrunning">
+            <set_order_failed order="this.assignedcontrolled.order" text="{1045, 101}" comment="Unable to reach destination." />
+          </do_if>
+          <debug_text text="'MiningPlayerSector [%s]: Unable to reach destination. Aborting.'.[this.assignedcontrolled.debugname]" chance="100" filter="scripts" />
+          <resume label="cleanup" />
+        </do_if>
+      </do_if>
+
+      <set_value name="$targetPos" exact="null" />
+
+      <wait min="2s" max="5s" chance="0" />
+
+      <find_object name="$resourceprobes" class="class.resourceprobe" space="$targetSector" owner="faction.player" multiple="true" />
+      <do_if value="$resourceprobes.count">
+        <set_value name="$bestProbe" />
+        <set_value name="$bestYield" exact="0" />
+        <do_for_each name="$probe" in="$resourceprobes">
+          <do_if value="$probe.isoperational">
+            <set_value name="$yield" exact="$probe.currentbestyield.{$ware}" />
+            <do_if value="$yield? and ($yield gt $bestYield)">
+              <set_value name="$bestYield" exact="$yield" />
+              <set_value name="$bestProbe" exact="$probe" />
+            </do_if>
+            <remove_value name="$yield" />
+          </do_if>
+        </do_for_each>
+        <do_if value="$bestProbe?">
+          <do_if value="this.isplayerowned and this.assignedcontrolled.attention ge attention.visible and $ware.hastag.mineral">
+            <!-- As resourcedetectionrange of probe is not available, will use currentradarrange of ship -->
+            <debug_text
+              text="'MiningPlayerSector [%s]: using resource probe %s to find %s-bearing asteroids in range %sm.'.
+              [this.assignedcontrolled.debugname, $bestProbe.debugname, $ware, this.assignedcontrolled.currentradarrange]"
+              chance="100" filter="scripts" />
+            <find_asteroid_in_cluster name="$closestAsteroid" cluster="$targetSector.cluster" refobject="$bestProbe" canpickup="false"
+              maxdistance="this.assignedcontrolled.currentradarrange"
+              ware="$ware" />
+            <do_if value="@$closestAsteroid.hascontext.{$targetSector}">
+              <create_position name="$targetPos" space="$targetSector" object="$closestAsteroid" min="200m" max="1km" />
+              <debug_text
+                text="'MiningPlayerSector [%s]: found %s-bearing asteroid %sm away, near to %s probe (yield %s).'.
+                [this.assignedcontrolled.debugname, $ware, this.assignedcontrolled.distanceto.{$closestAsteroid}, $bestProbe.debugname, $bestYield]"
+                chance="100" filter="scripts" />
+            </do_if>
+            <remove_value name="$closestAsteroid" />
+          </do_if>
+          <do_if value="not $targetPos? or @$targetPos == null">
+            <create_position name="$targetPos" space="$targetSector" object="$bestProbe" min="3km" max="10km" />
+            <debug_text
+              text="'MiningPlayerSector [%s]: using resource probe %s in %s for %s (yield %s)'.
+              [this.assignedcontrolled.debugname, $bestProbe, $targetSector.knownname, $ware, $bestYield]"
+              chance="100" filter="scripts" />
+          </do_if>
+        </do_if>
+      </do_if>
+      <remove_value name="$bestYield" />
+      <remove_value name="$bestProbe" />
+      <remove_value name="$resourceprobes" />
+
+      <do_if value="$targetPos? and @$targetPos != null">
+        <set_value name="$distance" exact="[this.assignedcontrolled.currentradarrange, $targetSector.sector.coresize].max" />
+        <do_if value="this.isplayerowned and this.assignedcontrolled.attention ge attention.visible and $ware.hastag.mineral">
+          <find_asteroid_in_cluster name="$closestAsteroid" cluster="$targetSector.cluster" refobject="this.assignedcontrolled" canpickup="false"
+            maxdistance="$distance" ware="$ware" />
+          <do_if value="@$closestAsteroid.hascontext.{$targetSector}">
+            <create_position name="$targetPos" space="$targetSector" object="$closestAsteroid" min="200m" max="1km" />
+          </do_if>
+          <remove_value name="$closestAsteroid" />
+        </do_if>
+        <do_if value="not $targetPos? or @$targetPos == null">
+          <find_closest_resource sector="$targetSector" position="$targetPos" ware="$ware" refobject="this.assignedcontrolled"
+            minamount="this.assignedcontrolled.cargo.{$ware}.free" useundiscovered="false" distance="$distance" />
+          <debug_text
+            text="'MiningPlayerSector [%s]: usable concentrations of %s found in %s, %sm away from ship.'.
+            [this.assignedcontrolled.debugname, $ware.name, $targetSector.knownname, this.assignedcontrolled.distanceto.{[$targetSector, $targetPos]}]"
+            chance="100" filter="scripts" />
+        </do_if>
+        <remove_value name="$distance" />
+      </do_if>
+
+      <do_if value="$targetPos? and @$targetPos != null">
+        <set_command command="command.mining" param="$targetSector" />
+        <run_script name="'order.mining.collect.ship'" result="$collectResult">
+          <param name="destination" value="[$targetSector, $targetPos]" />
+          <param name="ware" value="$ware" />
+          <param name="debugchance" value="$debugchance" />
+        </run_script>
+        <run_script name="'lib.recall.subordinates'" />
+
+        <do_if value="($collectResult == 'nodrones') and @this.assignedcontrolled.order.isrunning">
+          <set_order_failed order="this.assignedcontrolled.order" text="{1045,138}" comment="No available mining drones." />
+        </do_if>
+      </do_if>
+      <do_else>
+        <set_order_failed order="this.assignedcontrolled.order" text="{1045, 105}" comment="No resources found." />
+        <set_value name="$collectResult" exact="'no_resources'" />
+      </do_else>
+
+      <do_if value="$collectResult != 'aborted'">
+        <do_if value="$ware.hastag.liquid">
+          <set_value name="$infomining" exact="{1015,24}" comment="Info: gas mining stopped" />
+        </do_if>
+        <do_else>
+          <set_value name="$infomining" exact="{1015,25}" comment="Info: mineral mining stopped" />
+        </do_else>
+
+        <do_if value="this.isplayerowned and not this.isclass.computer">
+          <do_if value="$collectResult != 'no_resources'">
+            <do_if
+              value="not this.assignedcontrolled.nextorder and (not this.assignedcontrolled.commander or (this.assignedcontrolled.commander == player.occupiedship)) and notification.npc_await_orders.active">
+              <run_script name="'player.interaction'">
+                <param name="Line" value="10304" comment="Awaiting orders." />
+                <param name="MaxQueueDelay" value="10s" />
+                <param name="caption" value="$infomining + ' - ' + {1016,6}.[this.assignedcontrolled.knownname, this.assignedcontrolled.idcode]"
+                  comment="Info: (24: gas, 25: mineral) mining stopped" />
+                <param name="interactive" value="false" />
+                <param name="debugchance" value="$debugchance" />
+              </run_script>
+            </do_if>
+          </do_if>
+          <do_elseif value="this.shouldwarnplayer and notification.npc_order_not_complete.active">
+            <run_script name="'player.interaction'" sinceversion="1">
+              <param name="Line" value="10303" comment="Last order could not be completed." />
+              <param name="MaxQueueDelay" value="10s" />
+              <param name="caption" value="$infomining + ' - ' + {1016,6}.[this.assignedcontrolled.knownname, this.assignedcontrolled.idcode]"
+                comment="Info: (24: gas, 25: mineral) mining stopped" />
+              <param name="interactive" value="false" />
+              <param name="debugchance" value="$debugchance" />
+            </run_script>
+          </do_elseif>
+          <do_if value="this.shouldwarnplayer">
+            <write_to_logbook category="general" title="$infomining"
+              text="{1016, 93}.[this.assignedcontrolled.knownname, this.assignedcontrolled.idcode, $location.knownname]" interaction="showonmap"
+              object="this.assignedcontrolled" comment="%1 (%2) finished mining in sector %3." />
+            <wait chance="0" />
+          </do_if>
+        </do_if>
+      </do_if>
+
+      <label name="cleanup" />
+
+      <wait min="2s" max="5s" />
+
+    </actions>
+  </attention>
+</aiscript>

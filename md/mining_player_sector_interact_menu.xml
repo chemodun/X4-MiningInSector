@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="Mining_Player_Sector_Interact_Menu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <cues>
+    <cue name="Main">
+      <actions>
+        <debug_text text="'MiningPlayerSector: Main'" chance="100" filter="scripts" />
+        <do_if value="@$detectedMimicRepeatOrders == null">
+          <set_value name="$detectedMimicRepeatOrders" exact="false" />
+        </do_if>
+      </actions>
+      <cues>
+
+        <cue name="Detect_Mimic_Repeat_Orders" instantiate="true">
+          <conditions>
+            <event_cue_signalled cue="md.Mimic_Repeat_Orders.Reloaded" />
+          </conditions>
+          <actions>
+            <set_value name="$detectedMimicRepeatOrders" exact="true" />
+            <debug_text text="'MiningPlayerSector: Detected Mimic Repeat Orders mod installed.'" chance="100" filter="scripts" />
+          </actions>
+        </cue>
+
+        <cue name="Add_Menu_Actions" instantiate="true">
+          <conditions>
+            <event_cue_signalled cue="md.Interact_Menu_API.Get_Actions" />
+            <debug_text
+              text="'MiningPlayerSector: Get_Actions invoked where Mimic Repeat Orders detected is %s with param: %s'.[@$detectedMimicRepeatOrders, @event.param]"
+              chance="100" filter="scripts" />
+            <check_value value="@$detectedMimicRepeatOrders" />
+            <debug_text
+              text="'MiningPlayerSector: Get_Actions invoked with object: %s, is sector: %s'.[@event.param.$object, @event.param.$object.isclass.sector]"
+              chance="100" filter="scripts" />
+            <check_value value="player.holomap.isopen" />
+            <check_value value="event.param.$object? and @event.param.$object != null" />
+            <check_value value="event.param.$object.isclass.sector" />
+            <check_value value="event.param.$selectedplayerships? and @event.param.$selectedplayerships.count == 1" />
+            <check_value value="event.param.$selectedplayerships.{1}.hasorderloop" />
+          </conditions>
+          <actions>
+            <debug_text text="'MiningPlayerSector: Adding menu actions.'" chance="100" filter="scripts" />
+            <set_value name="$params" exact="event.param" />
+            <set_value name="$sector" exact="@$params.$object" />
+            <set_value name="$ship" exact="@$params.$selectedplayerships.{1}" />
+            <set_value name="$wares" exact="[]" />
+            <debug_text
+              text="'MiningPlayerSector: Target sector is %s with resources: %s.'.[$sector.knownname, $sector.resources.list]"
+              chance="100" filter="scripts" />
+            <debug_text
+              text="'MiningPlayerSector: Target ship is %s. With Cargo capacity solid: %s and liquid: %s.'.[$ship.name, $ship.cargo.capacity.solid, $ship.cargo.capacity.liquid]"
+              chance="100" filter="scripts" />
+            <find_object name="$anyObject" space="$sector" />
+            <do_for_each name="$ware" in="$sector.resources.list">
+              <debug_text text="'MiningPlayerSector: Checking ware %s.'.[$ware.name]" chance="100" filter="scripts" />
+              <do_if value="@$ship.cargo.{$ware}.max gt 0">
+                <find_closest_resource sector="$sector" position="$targetPos" ware="$ware" refobject="$anyObject"
+                  useundiscovered="false" /> <!-- minamount="$ship.cargo.{$ware}.free" -->
+                <debug_text text="'MiningPlayerSector: Found resource %s in sector %s at position %s.'.[$ware.name, $sector.knownname, @$targetPos]"
+                  chance="100" filter="scripts" />
+                <do_if value="@$targetPos != null">
+                  <signal_cue_instantly
+                    cue="md.Interact_Menu_API.Add_Action"
+                    param="table[
+                      $id         = 'mining_player_sector_main_%s'.[$ware.id],
+                      $section    = 'mining',
+                      $text       = {1972092409, 1001}.[$ware.name],
+                      $text2      = '\033G%s\033X'.[{1001, 7851}],
+                      $mouseover  = {1972092409, 1002}.[$ware.name, $sector.knownname],
+                      $active     = true,
+                      $callback   = On_Call_Back,
+                      $echo       = table[
+                        $ware       = $ware,
+                      ],
+                    ]" />
+                </do_if>
+              </do_if>
+            </do_for_each>
+          </actions>
+        </cue>
+
+        <cue name="On_Call_Back" instantiate="true">
+          <conditions>
+            <event_cue_signalled />
+          </conditions>
+          <actions>
+            <debug_text text="'MiningPlayerSector: On_Call_Back invoked with param: %s'.[event.param]" chance="100" filter="scripts" />
+            <set_value name="$params" exact="event.param" />
+            <set_value name="$sector" exact="@$params.$object" />
+            <set_value name="$ship" exact="@$params.$selectedplayerships.{1}" />
+            <set_value name="$ware" exact="@$params.$echo.$ware" />
+            <do_if value="@$ware != null and $ship.hasorderloop">
+              <debug_text
+                text="'MiningPlayerSector: On_Call_Back invoked for ware: %s in sector: %s with ship: %s. Mimic Repeat Orders detected: %s (%s).'.
+                  [$ware.name, $sector.knownname, $ship.name, @$detectedMimicRepeatOrders]"
+                chance="100" filter="scripts" />
+              <do_if value="@$detectedMimicRepeatOrders != null and $detectedMimicRepeatOrders">
+                <debug_text text="'MiningPlayerSector: On_Call_Back Signalling'" chance="100" filter="scripts" />
+                <signal_objects object="player.entity" param="'mimic_repeat_orders_add_order_to_queue'"
+                  param2="table[
+                    $ship = $ship,
+                    $order = 'MiningPlayerSector',
+                    $params = table[
+                      $location = $sector,
+                      $ware = $ware,
+                    ],
+                  ]" />
+              </do_if>
+            </do_if>
+          </actions>
+        </cue>
+      </cues>
+    </cue>
+  </cues>
+</mdscript>
