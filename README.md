@@ -19,7 +19,7 @@ Simple mining routine for player owned ships in sector to be managed by Repeat O
 - `Mod Support APIs` by [SirNukes](https://next.nexusmods.com/profile/sirnukes?gameId=2659) to be installed and enabled. Version `1.93` and upper is required.
   - It is available via Steam - [SirNukes Mod Support APIs](https://steamcommunity.com/sharedfiles/filedetails/?id=2042901274)
   - Or via the Nexus Mods - [Mod Support APIs](https://www.nexusmods.com/x4foundations/mods/503)
-- `Mimic Repeat Orders` mod by [Chem O`Dun](https://next.nexusmods.com/profile/ChemODun?gameId=2659) to be installed and enabled. Version `1.02` and upper is required.
+- `Mimic Repeat Orders` mod by [Chem O`Dun](https://next.nexusmods.com/profile/ChemODun?gameId=2659) to be installed and enabled. Version `1.10` and upper is required.
   - It is available via Steam - [Mimic Repeat Orders](https://steamcommunity.com/sharedfiles/filedetails/?id=3599279973)
   - Or via the Nexus Mods - [Mimic Repeat Orders](https://www.nexusmods.com/x4foundations/mods/1875)
 
@@ -65,7 +65,7 @@ When you right-click on a sector in the map view, you will see the context menu 
 
 ## Changelog
 
-### [1.00] - 2025-11-08
+### [1.00] - 2025-11-09
 
 - Added
   - Initial public version
