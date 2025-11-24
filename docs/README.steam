@@ -57,6 +57,10 @@ When you right-click on a sector in the map view, you will see the context menu 
 Video demonstration of the Mining in Sector for Mimic Repeat Orders. Version 1.00
 [previewyoutube=hfOSsG4Q6Ck;full][/previewyoutube]
 
+[h2][b]Caution[/b][/h2]
+
+Not recommended to be in-person on ship while it is executing this order to mine [b]Nividium[/b], as standard mining script may take significant time to find appropriate asteroids or not find it at all.
+
 [h2][b]Credits[/b][/h2]
 [list]
 [*] Author: Chem O`Dun, on [url=https://next.nexusmods.com/profile/ChemODun/mods?gameId=2659]Nexus Mods[/url] and [url=https://steamcommunity.com/id/chemodun/myworkshopfiles/?appid=392160]Steam Workshop[/url]
@@ -70,6 +74,13 @@ Video demonstration of the Mining in Sector for Mimic Repeat Orders. Version 1.0
 [/list]
 [h2][b]Changelog[/b][/h2]
 
+[h2][1.01] - 2025-11-24[/h2]
+[list]
+[*] Fixed
+[list]
+[*] Corrected mining location find procedure.
+[/list]
+[/list]
 [h2][1.00] - 2025-11-09[/h2]
 [list]
 [*] Added
