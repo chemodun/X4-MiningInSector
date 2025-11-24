@@ -77,7 +77,7 @@
           </actions>
         </cue>
 
-        <cue name="On_Call_Back" instantiate="true">
+        <cue name="On_Call_Back" instantiate="true" version="2">
           <conditions>
             <event_cue_signalled />
           </conditions>
@@ -89,7 +89,7 @@
             <set_value name="$ware" exact="@$params.$echo.$ware" />
             <do_if value="@$ware != null and $ship.hasorderloop">
               <debug_text
-                text="'MiningPlayerSector: On_Call_Back invoked for ware: %s in sector: %s with ship: %s. Mimic Repeat Orders detected: %s (%s).'.
+                text="'MiningPlayerSector: On_Call_Back invoked for ware: %s in sector: %s with ship: %s. Mimic Repeat Orders detected: %s.'.
                   [$ware.name, $sector.knownname, $ship.name, @$detectedMimicRepeatOrders]"
                 chance="100" filter="scripts" />
               <do_if value="@$detectedMimicRepeatOrders != null and $detectedMimicRepeatOrders">
