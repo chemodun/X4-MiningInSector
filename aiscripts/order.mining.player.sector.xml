@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <aiscript name="order.mining.player.sector" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="aiscripts.xsd" priority="2"
-  version="4">
+  version="5">
   <!--
   Wrapper script for player mining in sector, starting mining.collect.ship
   -->
@@ -25,18 +25,15 @@
         <find_asteroid_with_yield_in_sector name="$closestAsteroids" sector="$targetSector" refobject="$refObject" canpickup="false"
           maxdistance="$distance" ware="$ware" multiple="true" />
         <debug_text
-          text="'MiningPlayerSector [%s]: found %s asteroids bearing %s in %s within %sm from %s.'.
+          text="'MiningPlayerSector [%s]: asteroid search: found %s %s-bearing asteroid(s) in %s within %sm of %s.'.
               [this.assignedcontrolled.debugname, $closestAsteroids.count, $ware.name, $targetSector.knownname, $distance, $refObject.debugname]"
           chance="$debugchance" filter="scripts" />
         <do_if value="$closestAsteroids.count gt 0">
-          <debug_text
-            text="'MiningPlayerSector [%s]: found %s asteroids bearing %s in %s within %sm from %s.'.
-                [this.assignedcontrolled.debugname, $closestAsteroids.count, $ware.name, $targetSector.knownname, $distance, $refObject.debugname]"
-            chance="$debugchance" filter="scripts" />
           <sort_list list="$closestAsteroids"
             sortbyvalue="$refObject.distanceto.{loop.element} + if loop.element.hascontext.{$targetSector} then 0 else $targetSector.coresize"
             sortdescending="false" />
           <set_value name="$closestAsteroid" exact="$closestAsteroids.{1}" />
+          <debug_text text="'MiningPlayerSector [%s]: top asteroid candidate: %s, %sm from ref, %sm from ship.'.[this.assignedcontrolled.debugname, $closestAsteroid.debugname, $refObject.distanceto.{$closestAsteroid}, this.assignedcontrolled.distanceto.{$closestAsteroid}]" chance="$debugchance" filter="scripts" />
           <do_if value="@$closestAsteroid.hascontext.{$targetSector} != null">
             <create_position name="$targetPos" space="$targetSector" object="$closestAsteroid" min="200m" max="1km" />
             <debug_text
@@ -44,6 +41,9 @@
                   [this.assignedcontrolled.debugname, $ware, this.assignedcontrolled.distanceto.{$closestAsteroid}, $refObject.distanceto.{$closestAsteroid}, $refObject.debugname]"
               chance="$debugchance" filter="scripts" />
           </do_if>
+          <do_else>
+            <debug_text text="'MiningPlayerSector [%s]: asteroid %s is not in target sector %s - skipping'.[this.assignedcontrolled.debugname, $closestAsteroid.debugname, $targetSector.knownname]" chance="$debugchance" filter="scripts" />
+          </do_else>
           <remove_value name="$closestAsteroid" />
         </do_if>
         <remove_value name="$closestAsteroids" />
@@ -67,6 +67,7 @@
     <set_value name="$debugchance" exact="if @player.entity.$miningPlayerSectorConfig.$debugLog then 100 else 0" />
 
     <set_command command="command.freemining" />
+    <debug_text text="'MiningPlayerSector [%s]: START - mining %s in %s (debugchance=%s).'.[this.assignedcontrolled.debugname, $ware.name, $targetSector.knownname, $debugchance]" chance="$debugchance" filter="scripts" />
   </init>
   <attention min="unknown">
     <actions>
@@ -130,40 +131,49 @@
       <wait min="2s" max="5s" chance="0" />
 
       <find_object name="$resourceProbes" class="class.resourceprobe" space="$targetSector" owner="faction.player" multiple="true" />
+      <debug_text text="'MiningPlayerSector [%s]: found %s resource probe(s) in %s.'.[this.assignedcontrolled.debugname, $resourceProbes.count, $targetSector.knownname]" chance="$debugchance" filter="scripts" />
       <do_if value="$resourceProbes.count">
-        <sort_list list="$resourceProbes" sortbyvalue="loop.element.currentbestyield.{$ware}" sortdescending="true" />
+        <sort_list list="$resourceProbes" sortbyvalue="loop.element.bestyieldrating.{$ware}" sortdescending="true" />
         <set_value name="$bestProbe" exact="null" />
         <set_value name="$bestYield" exact="0" />
         <set_value name="$bestDistance" exact="0" />
         <do_for_each name="$probe" in="$resourceProbes">
           <do_if value="$probe.isoperational">
-            <set_value name="$yield" exact="$probe.currentbestyield.{$ware}" />
-            <do_if value="$bestYield == 0">
+            <set_value name="$yield" exact="$probe.bestyieldrating.{$ware}" />
+            <debug_text text="'MiningPlayerSector [%s]: probe %s: yieldrating=%s for %s'.[this.assignedcontrolled.debugname, $probe.debugname, $yield, $ware.name]" chance="$debugchance" filter="scripts" />
+            <do_if value="not $yield">
+              <debug_text text="'MiningPlayerSector [%s]: probe %s skipped - does not detect %s'.[this.assignedcontrolled.debugname, $probe.debugname, $ware.name]" chance="$debugchance" filter="scripts" />
+            </do_if>
+            <do_elseif value="$bestYield == 0">
               <set_value name="$bestDistance" exact="this.assignedcontrolled.distanceto.{$probe}" />
               <set_value name="$bestProbe" exact="$probe" />
               <set_value name="$bestYield" exact="$yield" />
               <debug_text
-                text="'MiningPlayerSector [%s]: The best probe %s with yield %s on distance %s '.[this.assignedcontrolled.debugname, $bestProbe.debugname, $bestYield, $bestDistance]"
+                text="'MiningPlayerSector [%s]: The best probe %s with yieldrating %s on distance %s '.[this.assignedcontrolled.debugname, $bestProbe.debugname, $bestYield, $bestDistance]"
                 chance="$debugchance" filter="scripts" />
-            </do_if>
+            </do_elseif>
             <do_elseif value="$bestYield gt 0">
               <do_if value="(($bestYield - $yield) * 1.0  / $bestYield) le 0.4">
                 <set_value name="$distance" exact="this.assignedcontrolled.distanceto.{$probe}" />
                 <do_if value="$distance lt $bestDistance">
+                  <debug_text text="'MiningPlayerSector [%s]: probe %s closer (%sm vs %sm, yieldrating %s vs best %s) - new best'.[this.assignedcontrolled.debugname, $probe.debugname, $distance, $bestDistance, $yield, $bestYield]" chance="$debugchance" filter="scripts" />
                   <set_value name="$bestDistance" exact="$distance" />
                   <set_value name="$bestProbe" exact="$probe" />
                 </do_if>
                 <remove_value name="$distance" />
               </do_if>
+              <do_else>
+                <debug_text text="'MiningPlayerSector [%s]: probe %s rejected - yieldrating %s is more than 40%% below best %s'.[this.assignedcontrolled.debugname, $probe.debugname, $yield, $bestYield]" chance="$debugchance" filter="scripts" />
+              </do_else>
             </do_elseif>
             <remove_value name="$yield" />
           </do_if>
         </do_for_each>
         <do_if value="$bestProbe?">
-          <set_value name="$bestYield" exact="$bestProbe.currentbestyield.{$ware}" />
+          <set_value name="$bestYield" exact="$bestProbe.bestyieldrating.{$ware}" />
           <do_if value="this.isplayerowned and this.assignedcontrolled.attention ge attention.visible and $ware.hastag.mineral">
             <debug_text
-              text="'MiningPlayerSector [%s]: going to search asteroid using resource probe %s in %s for %s (yield %s) on distance %s.'.
+              text="'MiningPlayerSector [%s]: going to search asteroid using resource probe %s in %s for %s (yieldrating %s) on distance %s.'.
               [this.assignedcontrolled.debugname, $bestProbe.debugname, $targetSector.knownname, $ware, $bestYield, $bestDistance]"
               chance="$debugchance" filter="scripts" />
             <set_value name="$distance" exact="this.assignedcontrolled.currentradarrange" />
@@ -172,16 +182,20 @@
             <remove_value name="$refObject" />
             <remove_value name="$distance" />
           </do_if>
+          <debug_text text="'MiningPlayerSector [%s]: after probe %s asteroid search: targetPos=%s'.[this.assignedcontrolled.debugname, $bestProbe.debugname, @$targetPos]" chance="$debugchance" filter="scripts" />
           <do_if value="not $targetPos? or @$targetPos == null">
             <find_closest_resource sector="$targetSector" position="$targetPos" ware="$ware" refobject="$bestProbe"
-              minamount="this.assignedcontrolled.cargo.{$ware}.free" useundiscovered="false" distance="$distance" />
+              minrating="1" useundiscovered="false" distance="$distance" />
             <debug_text
-              text="'MiningPlayerSector [%s]: using resource probe %s in %s for %s (yield %s). Point at distance %s, from probe: %s'.
+              text="'MiningPlayerSector [%s]: using resource probe %s in %s for %s (yieldrating %s). Point at distance %s, from probe: %s'.
               [this.assignedcontrolled.debugname, $bestProbe.debugname, $targetSector.knownname, $ware, $bestYield, this.assignedcontrolled.distanceto.[$targetSector, $targetPos], $distance]"
               chance="$debugchance" filter="scripts" />
             <remove_value name="$distance" />
           </do_if>
         </do_if>
+        <do_else>
+          <debug_text text="'MiningPlayerSector [%s]: no operational probe found for %s in %s'.[this.assignedcontrolled.debugname, $ware.name, $targetSector.knownname]" chance="$debugchance" filter="scripts" />
+        </do_else>
         <remove_value name="$bestYield" />
         <remove_value name="$bestProbe" />
         <remove_value name="$bestDistance" />
@@ -189,6 +203,7 @@
       <remove_value name="$resourceProbes" />
 
       <do_if value="not $targetPos? or @$targetPos == null">
+        <debug_text text="'MiningPlayerSector [%s]: no position from probes - direct sector search for %s in %s'.[this.assignedcontrolled.debugname, $ware.name, $targetSector.knownname]" chance="$debugchance" filter="scripts" />
         <do_if value="this.isplayerowned and this.assignedcontrolled.attention ge attention.visible and $ware.hastag.mineral">
           <debug_text
             text="'MiningPlayerSector [%s]: going to search asteroid in sector: %s.'.[this.assignedcontrolled.debugname, $targetSector.knownname]" chance="$debugchance"
@@ -198,9 +213,12 @@
           <include_interrupt_actions ref="FindClosestAsteroidForMining" />
           <remove_value name="$refObject" />
         </do_if>
+        <do_else>
+          <debug_text text="'MiningPlayerSector [%s]: skipping asteroid search - ware %s is gas or ship is not visible'.[this.assignedcontrolled.debugname, $ware.name]" chance="$debugchance" filter="scripts" />
+        </do_else>
         <do_if value="not $targetPos? or @$targetPos == null">
           <find_closest_resource sector="$targetSector" position="$targetPos" ware="$ware" refobject="this.assignedcontrolled"
-            minamount="this.assignedcontrolled.cargo.{$ware}.free" useundiscovered="false" distance="$distance" />
+            useundiscovered="false" distance="$distance" />
           <debug_text
             text="'MiningPlayerSector [%s]: usable concentrations of %s found in %s, %sm away from ship.'.
             [this.assignedcontrolled.debugname, $ware.name, $targetSector.knownname, $distance]"
@@ -221,7 +239,11 @@
         </find_closest_resource>
         <do_if value="@$resourceArea != null">
           <add_yield_reservation reserver="this.assignedcontrolled" resourcearea="$resourceArea" />
+          <debug_text text="'MiningPlayerSector [%s]: yield reservation added for resourceArea %s'.[this.assignedcontrolled.debugname, $resourceArea]" chance="$debugchance" filter="scripts" />
         </do_if>
+        <do_else>
+          <debug_text text="'MiningPlayerSector [%s]: no resourceArea found at position %s - proceeding without reservation'.[this.assignedcontrolled.debugname, $targetPos]" chance="$debugchance" filter="scripts" />
+        </do_else>
         <remove_value name="$tmpSector" />
         <remove_value name="$tmpPos" />
         <set_command command="command.mining" param="$targetSector" />
