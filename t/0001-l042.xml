@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Czech -->
 <diff>
   <add sel="/language">
@@ -7,6 +7,9 @@
       <t id="2">Jednoduchá těžební rutina pro lodě ve vlastnictví hráče v sektoru, používaná skriptem {1001, 11267}</t>
       <t id="1001">V Sektoru: %s</t>
       <t id="1002">Těžba %s v Sektoru %s, spravovaná {1001, 11267}</t>
+      <!-- settings labels (90000+) -->
+      <t id="90001">General Settings</t>
+      <t id="90002">Enable debug logging</t>
     </page>
   </add>
 </diff>

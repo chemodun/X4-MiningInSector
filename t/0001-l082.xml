@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Korean -->
 <diff>
   <add sel="/language">
@@ -7,6 +7,9 @@
       <t id="2">플레이어 소유 함선이 섹터에서 사용하는 간단한 채굴 루틴으로, {1001, 11267}에서 사용됩니다</t>
       <t id="1001">섹터: %s</t>
       <t id="1002">섹터 %s에서 %s을(를) 채굴 중이며, {1001, 11267}이 관리합니다</t>
+      <!-- settings labels (90000+) -->
+      <t id="90001">General Settings</t>
+      <t id="90002">Enable debug logging</t>
     </page>
   </add>
 </diff>

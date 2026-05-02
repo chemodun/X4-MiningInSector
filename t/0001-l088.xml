@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Bengali -->
 <diff>
   <add sel="/language">
@@ -7,6 +7,9 @@
       <t id="2">প্লেয়ারের মালিকানাধীন জাহাজের জন্য একটি সহজ খনন রুটিন, {1001, 11267} দ্বারা ব্যবহৃত</t>
       <t id="1001">সেক্টরে: %s</t>
       <t id="1002">সেক্টর %s-এ %s আহরণ করা হচ্ছে, {1001, 11267} দ্বারা পরিচালিত</t>
+      <!-- settings labels (90000+) -->
+      <t id="90001">General Settings</t>
+      <t id="90002">Enable debug logging</t>
     </page>
   </add>
 </diff>

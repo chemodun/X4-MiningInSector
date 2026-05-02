@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Portuguese -->
 <diff>
   <add sel="/language">
@@ -7,6 +7,9 @@
       <t id="2">Rotina simples de mineração para naves pertencentes ao jogador no setor, utilizada por {1001, 11267}</t>
       <t id="1001">No Setor: %s</t>
       <t id="1002">Minerando %s no Setor %s, gerenciado por {1001, 11267}</t>
+      <!-- settings labels (90000+) -->
+      <t id="90001">General Settings</t>
+      <t id="90002">Enable debug logging</t>
     </page>
   </add>
 </diff>

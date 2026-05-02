@@ -37,25 +37,26 @@
             <check_value value="event.param.$selectedplayerships.{1}.hasorderloop" />
           </conditions>
           <actions>
-            <debug_text text="'MiningPlayerSector: Adding menu actions.'" chance="100" filter="scripts" />
+            <set_value name="$debugchance" exact="if @player.entity.$miningPlayerSectorConfig.$debugLog then 100 else 0" />
+            <debug_text text="'MiningPlayerSector: Adding menu actions.'" chance="$debugchance" filter="scripts" />
             <set_value name="$params" exact="event.param" />
             <set_value name="$sector" exact="@$params.$object" />
             <set_value name="$ship" exact="@$params.$selectedplayerships.{1}" />
             <set_value name="$wares" exact="[]" />
             <debug_text
               text="'MiningPlayerSector: Target sector is %s with resources: %s.'.[$sector.knownname, $sector.resources.list]"
-              chance="100" filter="scripts" />
+              chance="$debugchance" filter="scripts" />
             <debug_text
               text="'MiningPlayerSector: Target ship is %s. With Cargo capacity solid: %s and liquid: %s.'.[$ship.name, $ship.cargo.capacity.solid, $ship.cargo.capacity.liquid]"
-              chance="100" filter="scripts" />
+              chance="$debugchance" filter="scripts" />
             <find_object name="$anyObject" space="$sector" />
             <do_for_each name="$ware" in="$sector.resources.list">
-              <debug_text text="'MiningPlayerSector: Checking ware %s.'.[$ware.name]" chance="100" filter="scripts" />
+              <debug_text text="'MiningPlayerSector: Checking ware %s.'.[$ware.name]" chance="$debugchance" filter="scripts" />
               <do_if value="@$ship.cargo.{$ware}.max gt 0">
                 <find_closest_resource sector="$sector" position="$targetPos" ware="$ware" refobject="$anyObject"
                   useundiscovered="false" /> <!-- minamount="$ship.cargo.{$ware}.free" -->
                 <debug_text text="'MiningPlayerSector: Found resource %s in sector %s at position %s.'.[$ware.name, $sector.knownname, @$targetPos]"
-                  chance="100" filter="scripts" />
+                  chance="$debugchance" filter="scripts" />
                 <do_if value="@$targetPos != null">
                   <signal_cue_instantly
                     cue="md.Interact_Menu_API.Add_Action"
@@ -82,7 +83,8 @@
             <event_cue_signalled />
           </conditions>
           <actions>
-            <debug_text text="'MiningPlayerSector: On_Call_Back invoked with param: %s'.[event.param]" chance="100" filter="scripts" />
+            <set_value name="$debugchance" exact="if @player.entity.$miningPlayerSectorConfig.$debugLog then 100 else 0" />
+            <debug_text text="'MiningPlayerSector: On_Call_Back invoked with param: %s'.[event.param]" chance="$debugchance" filter="scripts" />
             <set_value name="$params" exact="event.param" />
             <set_value name="$sector" exact="@$params.$object" />
             <set_value name="$ship" exact="@$params.$selectedplayerships.{1}" />
@@ -91,9 +93,9 @@
               <debug_text
                 text="'MiningPlayerSector: On_Call_Back invoked for ware: %s in sector: %s with ship: %s. Mimic Repeat Orders detected: %s.'.
                   [$ware.name, $sector.knownname, $ship.name, @$detectedMimicRepeatOrders]"
-                chance="100" filter="scripts" />
+                chance="$debugchance" filter="scripts" />
               <do_if value="@$detectedMimicRepeatOrders != null and $detectedMimicRepeatOrders">
-                <debug_text text="'MiningPlayerSector: On_Call_Back Signalling'" chance="100" filter="scripts" />
+                <debug_text text="'MiningPlayerSector: On_Call_Back Signalling'" chance="$debugchance" filter="scripts" />
                 <signal_objects object="player.entity" param="'mimic_repeat_orders_add_order_to_queue'"
                   param2="table[
                     $ship = $ship,
@@ -101,6 +103,7 @@
                     $params = table[
                       $location = $sector,
                       $ware = $ware,
+                      $debugchance = $debugchance,
                     ],
                   ]" />
               </do_if>
@@ -109,5 +112,6 @@
         </cue>
       </cues>
     </cue>
+
   </cues>
 </mdscript>

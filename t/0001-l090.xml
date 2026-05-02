@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Turkish -->
 <diff>
   <add sel="/language">
@@ -7,6 +7,9 @@
       <t id="2">Oyuncuya ait gemiler için sektörde kullanılan basit madencilik rutini; {1001, 11267} tarafından kullanılır</t>
       <t id="1001">Sektörde: %s</t>
       <t id="1002">%s madenciliği %s Sektöründe, {1001, 11267} tarafından yönetiliyor</t>
+      <!-- settings labels (90000+) -->
+      <t id="90001">General Settings</t>
+      <t id="90002">Enable debug logging</t>
     </page>
   </add>
 </diff>

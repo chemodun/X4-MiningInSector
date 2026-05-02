@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <aiscript name="order.mining.player.sector" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="aiscripts.xsd" priority="2"
-  version="2">
+  version="4">
   <!--
   Wrapper script for player mining in sector, starting mining.collect.ship
   -->
@@ -11,7 +11,7 @@
         <input_param name="cancarry" value="this.assignedcontrolled" />
         <input_param name="isminable" value="true" />
       </param>
-      <param name="debugchance" type="bool" default="0" advanced="true" text="{1041, 10086}" comment="Print debug output">
+      <param name="debugchance" type="bool" default="if @player.entity.$miningPlayerSectorConfig.$debugLog then 100 else 0" advanced="true" text="{1041, 10086}" comment="Print debug output">
         <input_param name="truevalue" value="100" />
       </param>
     </params>
@@ -22,27 +22,27 @@
   <interrupts>
     <library>
       <actions name="FindClosestAsteroidForMining">
-        <find_asteroid_in_cluster name="$closestAsteroids" cluster="$targetSector.cluster" refobject="$refObject" canpickup="false"
+        <find_asteroid_with_yield_in_sector name="$closestAsteroids" sector="$targetSector" refobject="$refObject" canpickup="false"
           maxdistance="$distance" ware="$ware" multiple="true" />
         <debug_text
           text="'MiningPlayerSector [%s]: found %s asteroids bearing %s in %s within %sm from %s.'.
               [this.assignedcontrolled.debugname, $closestAsteroids.count, $ware.name, $targetSector.knownname, $distance, $refObject.debugname]"
-          chance="100" filter="scripts" />
+          chance="$debugchance" filter="scripts" />
         <do_if value="$closestAsteroids.count gt 0">
           <debug_text
             text="'MiningPlayerSector [%s]: found %s asteroids bearing %s in %s within %sm from %s.'.
                 [this.assignedcontrolled.debugname, $closestAsteroids.count, $ware.name, $targetSector.knownname, $distance, $refObject.debugname]"
-            chance="100" filter="scripts" />
+            chance="$debugchance" filter="scripts" />
           <sort_list list="$closestAsteroids"
             sortbyvalue="$refObject.distanceto.{loop.element} + if loop.element.hascontext.{$targetSector} then 0 else $targetSector.coresize"
             sortdescending="false" />
           <set_value name="$closestAsteroid" exact="$closestAsteroids.{1}" />
-          <do_if value="@$closestAsteroid.hascontext.{$targetSector}">
+          <do_if value="@$closestAsteroid.hascontext.{$targetSector} != null">
             <create_position name="$targetPos" space="$targetSector" object="$closestAsteroid" min="200m" max="1km" />
             <debug_text
               text="'MiningPlayerSector [%s]: found %s-bearing asteroid %sm away, on distance %sm from %s'.
                   [this.assignedcontrolled.debugname, $ware, this.assignedcontrolled.distanceto.{$closestAsteroid}, $refObject.distanceto.{$closestAsteroid}, $refObject.debugname]"
-              chance="100" filter="scripts" />
+              chance="$debugchance" filter="scripts" />
           </do_if>
           <remove_value name="$closestAsteroid" />
         </do_if>
@@ -62,6 +62,9 @@
   <init>
     <set_value name="$targetSector" exact="$location" />
     <set_value name="$targetPos" exact="null" />
+    <set_value name="$resourceArea" exact="null" />
+
+    <set_value name="$debugchance" exact="if @player.entity.$miningPlayerSectorConfig.$debugLog then 100 else 0" />
 
     <set_command command="command.freemining" />
   </init>
@@ -72,7 +75,7 @@
         <do_if value="@this.assignedcontrolled.order.isrunning">
           <set_order_failed order="this.assignedcontrolled.order" text="{1045, 115}" comment="Not enough space in cargo hold." />
         </do_if>
-        <debug_text text="'MiningPlayerSector [%s]: Cargo hold is full. Aborting.'.[this.assignedcontrolled.debugname]" chance="100" filter="scripts" />
+        <debug_text text="'MiningPlayerSector [%s]: Cargo hold is full. Aborting.'.[this.assignedcontrolled.debugname]" chance="$debugchance" filter="scripts" />
         <resume label="cleanup" />
       </do_if>
 
@@ -117,7 +120,7 @@
           <do_if value="@this.assignedcontrolled.order.isrunning">
             <set_order_failed order="this.assignedcontrolled.order" text="{1045, 101}" comment="Unable to reach destination." />
           </do_if>
-          <debug_text text="'MiningPlayerSector [%s]: Unable to reach destination. Aborting.'.[this.assignedcontrolled.debugname]" chance="100" filter="scripts" />
+          <debug_text text="'MiningPlayerSector [%s]: Unable to reach destination. Aborting.'.[this.assignedcontrolled.debugname]" chance="$debugchance" filter="scripts" />
           <resume label="cleanup" />
         </do_if>
       </do_if>
@@ -141,7 +144,7 @@
               <set_value name="$bestYield" exact="$yield" />
               <debug_text
                 text="'MiningPlayerSector [%s]: The best probe %s with yield %s on distance %s '.[this.assignedcontrolled.debugname, $bestProbe.debugname, $bestYield, $bestDistance]"
-                chance="100" filter="scripts" />
+                chance="$debugchance" filter="scripts" />
             </do_if>
             <do_elseif value="$bestYield gt 0">
               <do_if value="(($bestYield - $yield) * 1.0  / $bestYield) le 0.4">
@@ -162,7 +165,7 @@
             <debug_text
               text="'MiningPlayerSector [%s]: going to search asteroid using resource probe %s in %s for %s (yield %s) on distance %s.'.
               [this.assignedcontrolled.debugname, $bestProbe.debugname, $targetSector.knownname, $ware, $bestYield, $bestDistance]"
-              chance="100" filter="scripts" />
+              chance="$debugchance" filter="scripts" />
             <set_value name="$distance" exact="this.assignedcontrolled.currentradarrange" />
             <set_value name="$refObject" exact="$bestProbe" />
             <include_interrupt_actions ref="FindClosestAsteroidForMining" />
@@ -175,7 +178,7 @@
             <debug_text
               text="'MiningPlayerSector [%s]: using resource probe %s in %s for %s (yield %s). Point at distance %s, from probe: %s'.
               [this.assignedcontrolled.debugname, $bestProbe.debugname, $targetSector.knownname, $ware, $bestYield, this.assignedcontrolled.distanceto.[$targetSector, $targetPos], $distance]"
-              chance="100" filter="scripts" />
+              chance="$debugchance" filter="scripts" />
             <remove_value name="$distance" />
           </do_if>
         </do_if>
@@ -188,7 +191,7 @@
       <do_if value="not $targetPos? or @$targetPos == null">
         <do_if value="this.isplayerowned and this.assignedcontrolled.attention ge attention.visible and $ware.hastag.mineral">
           <debug_text
-            text="'MiningPlayerSector [%s]: going to search asteroid in sector: %s.'.[this.assignedcontrolled.debugname, $targetSector.knownname]" chance="100"
+            text="'MiningPlayerSector [%s]: going to search asteroid in sector: %s.'.[this.assignedcontrolled.debugname, $targetSector.knownname]" chance="$debugchance"
             filter="scripts" />
           <set_value name="$distance" exact="[this.assignedcontrolled.currentradarrange, $targetSector.coresize].max" />
           <set_value name="$refObject" exact="this.assignedcontrolled" />
@@ -201,7 +204,7 @@
           <debug_text
             text="'MiningPlayerSector [%s]: usable concentrations of %s found in %s, %sm away from ship.'.
             [this.assignedcontrolled.debugname, $ware.name, $targetSector.knownname, $distance]"
-            chance="100" filter="scripts" />
+            chance="$debugchance" filter="scripts" />
           <remove_value name="$distance" />
         </do_if>
         <remove_value name="$distance" />
@@ -210,17 +213,35 @@
       <do_if value="$targetPos? and @$targetPos != null">
         <debug_text
           text="'MiningPlayerSector [%s]: collecting %s at %s in %s via order.mining.collect.ship script'.[this.assignedcontrolled.debugname, $ware.name, $targetPos, $targetSector.knownname]"
-          chance="100" filter="scripts" />
+          chance="$debugchance" filter="scripts" />
+        <!-- v9: get resourceArea for yield reservation -->
+        <find_closest_resource resourcearea="$resourceArea" ware="$ware" sector="$tmpSector" position="$tmpPos"
+          refobject="$targetSector">
+          <refposition value="$targetPos" object="$targetSector" />
+        </find_closest_resource>
+        <do_if value="@$resourceArea != null">
+          <add_yield_reservation reserver="this.assignedcontrolled" resourcearea="$resourceArea" />
+        </do_if>
+        <remove_value name="$tmpSector" />
+        <remove_value name="$tmpPos" />
         <set_command command="command.mining" param="$targetSector" />
+        <set_value name="$miningCollect" />
         <run_script name="'order.mining.collect.ship'" result="$collectResult">
           <param name="destination" value="[$targetSector, $targetPos]" />
           <param name="ware" value="$ware" />
+          <param name="resourcearea" value="@$resourceArea" />
           <param name="debugchance" value="$debugchance" />
         </run_script>
         <run_script name="'lib.recall.subordinates'" />
+        <remove_value name="$miningCollect" />
 
-        <do_if value="($collectResult == 'nodrones') and @this.assignedcontrolled.order.isrunning">
-          <set_order_failed order="this.assignedcontrolled.order" text="{1045,138}" comment="No available mining drones." />
+        <do_if value="@this.assignedcontrolled.order.isrunning">
+          <do_if value="($collectResult == 'nodrones')">
+            <set_order_failed order="this.assignedcontrolled.order" text="{1045,138}" comment="No available mining drones." />
+          </do_if>
+          <do_if value="($collectResult == 'miningrig_nosubordinates')">
+            <set_order_failed order="this.assignedcontrolled.order" text="{1045,162}" comment="No mining subordinates." />
+          </do_if>
         </do_if>
       </do_if>
       <do_else>
@@ -271,8 +292,17 @@
 
       <label name="cleanup" />
 
+      <do_if value="@$resourceArea != null">
+        <remove_yield_reservation reserver="this.assignedcontrolled" resourcearea="$resourceArea" />
+      </do_if>
+
       <wait min="2s" max="5s" />
 
     </actions>
   </attention>
+  <on_abort>
+    <do_if value="not $miningCollect? and @$resourceArea != null">
+      <remove_yield_reservation reserver="this.assignedcontrolled" resourcearea="$resourceArea" />
+    </do_if>
+  </on_abort>
 </aiscript>

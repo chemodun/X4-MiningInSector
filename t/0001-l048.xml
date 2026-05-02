@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Polish -->
 <diff>
   <add sel="/language">
@@ -7,6 +7,9 @@
       <t id="2">Prosta procedura wydobywcza dla statków należących do gracza w sektorze, używana przez {1001, 11267}</t>
       <t id="1001">W Sektorze: %s</t>
       <t id="1002">Wydobywanie %s w Sektorze %s, zarządzane przez {1001, 11267}</t>
+      <!-- settings labels (90000+) -->
+      <t id="90001">General Settings</t>
+      <t id="90002">Enable debug logging</t>
     </page>
   </add>
 </diff>

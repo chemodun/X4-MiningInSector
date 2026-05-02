@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Chinese -->
 <diff>
   <add sel="/language">
@@ -7,6 +7,9 @@
       <t id="2">用于玩家所属舰船在扇区内的简易采矿流程，供 {1001, 11267} 使用</t>
       <t id="1001">所在扇区：%s</t>
       <t id="1002">在扇区 %s 开采 %s，由 {1001, 11267} 管理</t>
+      <!-- settings labels (90000+) -->
+      <t id="90001">General Settings</t>
+      <t id="90002">Enable debug logging</t>
     </page>
   </add>
 </diff>

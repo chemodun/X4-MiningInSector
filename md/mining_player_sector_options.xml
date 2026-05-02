@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="Mining_Player_Sector_Options" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+    <cues>
+
+        <library name="DefaultConfig" purpose="include_actions" version="1">
+            <actions>
+                <do_if value="@player.entity.$miningPlayerSectorConfig == null">
+                    <set_value name="player.entity.$miningPlayerSectorConfig" exact="table[
+            $debugLog = false,
+          ]" />
+                </do_if>
+                <set_value name="$config" exact="player.entity.$miningPlayerSectorConfig" />
+                <do_if value="$config.$debugLog? == false">
+                    <set_value name="$config.$debugLog" exact="false" />
+                </do_if>
+            </actions>
+        </library>
+
+        <cue name="Register_Menu" instantiate="true" version="1">
+            <conditions>
+                <event_cue_signalled cue="md.Simple_Menu_API.Reloaded" />
+            </conditions>
+            <actions>
+                <signal_cue_instantly cue="md.Simple_Menu_API.Register_Options_Menu"
+                    param="table[
+            $id      = 'mining_player_sector_options',
+            $columns = 12,
+            $title   = {1972092409, 1},
+            $onOpen  = Mining_Player_Sector_Options_Menu,
+          ]" />
+            </actions>
+        </cue>
+
+        <cue name="Mining_Player_Sector_Options_Menu" instantiate="true" version="1">
+            <conditions>
+                <event_cue_signalled />
+            </conditions>
+            <actions>
+                <include_actions ref="DefaultConfig" />
+                <run_actions ref="md.Options_Helper.Add_Title_Row">
+                    <param name="title" value="{1972092409, 90001}" />
+                    <param name="columns" value="12" />
+                </run_actions>
+                <run_actions ref="md.Options_Helper.Add_Checkbox">
+                    <param name="id" value="'debugLog'" />
+                    <param name="col" value="1" />
+                    <param name="textColSpan" value="11" />
+                    <param name="text" value="{1972092409, 90002}" />
+                    <param name="data" value="$config" />
+                    <param name="handle" value="Handle_Config_Changed" />
+                </run_actions>
+                <remove_value name="$config" />
+            </actions>
+        </cue>
+
+        <cue name="Handle_Config_Changed" instantiate="true" version="1">
+            <conditions>
+                <event_cue_signalled />
+            </conditions>
+            <actions>
+                <include_actions ref="DefaultConfig" />
+                <set_value name="$resultTable" exact="$config" />
+                <include_actions ref="md.Options_Helper.Process_Checkbox_Changed" />
+                <remove_value name="$resultTable" />
+                <remove_value name="$config" />
+            </actions>
+        </cue>
+
+    </cues>
+</mdscript>

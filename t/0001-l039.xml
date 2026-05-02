@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Italian -->
 <diff>
   <add sel="/language">
@@ -7,6 +7,9 @@
       <t id="2">Routine di estrazione semplice per le navi di proprietà del giocatore nel settore da usare con {1001, 11267}</t>
       <t id="1001">Nel Settore: %s</t>
       <t id="1002">Estrazione di %s nel Settore %s, gestita da {1001, 11267}</t>
+      <!-- settings labels (90000+) -->
+      <t id="90001">General Settings</t>
+      <t id="90002">Enable debug logging</t>
     </page>
   </add>
 </diff>

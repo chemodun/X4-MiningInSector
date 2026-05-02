@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Japanese -->
 <diff>
   <add sel="/language">
@@ -7,6 +7,9 @@
       <t id="2">プレイヤー所有船がセクター内で使用する簡易採掘ルーチン。使用元: {1001, 11267}</t>
       <t id="1001">セクター: %s</t>
       <t id="1002">セクター %s で %s を採掘中、{1001, 11267} が管理</t>
+      <!-- settings labels (90000+) -->
+      <t id="90001">General Settings</t>
+      <t id="90002">Enable debug logging</t>
     </page>
   </add>
 </diff>
