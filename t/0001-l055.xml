@@ -8,8 +8,8 @@
       <t id="1001">No Setor: %s</t>
       <t id="1002">Minerando %s no Setor %s, gerenciado por {1001, 11267}</t>
       <!-- settings labels (90000+) -->
-      <t id="90001">General Settings</t>
-      <t id="90002">Enable debug logging</t>
+      <t id="90001">Configurações gerais</t>
+      <t id="90002">Ativar registro de depuração</t>
     </page>
   </add>
 </diff>

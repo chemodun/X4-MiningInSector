@@ -8,8 +8,8 @@
       <t id="1001">Dans le Secteur : %s</t>
       <t id="1002">Extraction de %s dans le Secteur %s, gérée par {1001, 11267}</t>
       <!-- settings labels (90000+) -->
-      <t id="90001">General Settings</t>
-      <t id="90002">Enable debug logging</t>
+      <t id="90001">Paramètres généraux</t>
+      <t id="90002">Activer la journalisation de débogage</t>
     </page>
   </add>
 </diff>

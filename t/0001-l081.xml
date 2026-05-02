@@ -8,8 +8,8 @@
       <t id="1001">セクター: %s</t>
       <t id="1002">セクター %s で %s を採掘中、{1001, 11267} が管理</t>
       <!-- settings labels (90000+) -->
-      <t id="90001">General Settings</t>
-      <t id="90002">Enable debug logging</t>
+      <t id="90001">一般設定</t>
+      <t id="90002">デバッグログを有効にする</t>
     </page>
   </add>
 </diff>

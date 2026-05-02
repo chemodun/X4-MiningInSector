@@ -8,8 +8,8 @@
       <t id="1001">En el Sector: %s</t>
       <t id="1002">Extrayendo %s en el Sector %s, gestionado por {1001, 11267}</t>
       <!-- settings labels (90000+) -->
-      <t id="90001">General Settings</t>
-      <t id="90002">Enable debug logging</t>
+      <t id="90001">Configuración general</t>
+      <t id="90002">Activar registro de depuración</t>
     </page>
   </add>
 </diff>

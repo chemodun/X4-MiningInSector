@@ -8,8 +8,8 @@
       <t id="1001">섹터: %s</t>
       <t id="1002">섹터 %s에서 %s을(를) 채굴 중이며, {1001, 11267}이 관리합니다</t>
       <!-- settings labels (90000+) -->
-      <t id="90001">General Settings</t>
-      <t id="90002">Enable debug logging</t>
+      <t id="90001">일반 설정</t>
+      <t id="90002">디버그 로깅 활성화</t>
     </page>
   </add>
 </diff>
