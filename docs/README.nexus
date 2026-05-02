@@ -12,6 +12,9 @@ Simple mining routine for player owned ships in sector to be managed by Repeat O
 [list]
 [*] Works only for player owned ships.
 [*] Can't be initiated out of Repeat Orders.
+[*] Mod versions 1.xx are compatible only with game versions 7.60 and 8.00.
+[*] Mod versions 2.xx are compatible with game version 9.00 and upper.
+[*] Mod version 2.00 is available only on Nexus Mods, not on Steam Workshop (due to its limitation).
 [/list]
 [size=3][u][b]Requirements[/b][/u][/size]
 [list]
@@ -74,6 +77,13 @@ Not recommended to be in-person on ship while it is executing this order to mine
 [/list]
 [size=3][u][b]Changelog[/b][/u][/size]
 
+[size=3][u][i][2.00] - 2026-05-02[/i][/u][/size]
+[list]
+[*] Added
+[list]
+[*] Rewritten to support for X4: Foundations version 9.00 and upper.
+[/list]
+[/list]
 [size=3][u][i][1.01] - 2025-11-24[/i][/u][/size]
 [list]
 [*] Fixed
