@@ -61,14 +61,11 @@ Configurable via the in-game Extension Options menu.
 
 ### Logbook settings
 
-- **Enable Logbook messages**: when enabled, ships report each mining stage to the logbook:
-  heading to the target sector, scanning for resources, mining started, mining finished, and
-  cargo hold full. Off by default.
+- **Enable Logbook messages**: when enabled, ships report each mining stage to the logbook: heading to the target sector, scanning for resources, mining started, mining finished, and cargo hold full. Off by default.
 
 ### Debug Settings
 
-- **Enable debug logging**: verbose script tracing for troubleshooting. Off by default, intended
-  for reporting issues rather than everyday use.
+- **Enable debug logging**: verbose script tracing for troubleshooting. Off by default, intended for reporting issues rather than everyday use.
 
 ## Video
 
@@ -94,9 +91,7 @@ Not recommended to be in-person on ship while it is executing this order to mine
 ### [2.01] - 2026-07-10
 
 - Added
-  - New "Logbook settings" Extension Options section with an "Enable Logbook messages" toggle:
-    ships now report each mining stage (heading to sector, scanning for resources, mining started,
-    mining finished, cargo hold full) to the logbook when enabled.
+  - New "Logbook settings" Extension Options section with an "Enable Logbook messages" toggle: ships now report each mining stage (heading to sector, scanning for resources, mining started, mining finished, cargo hold full) to the logbook when enabled.
 
 ### [2.00] - 2026-05-02
 
