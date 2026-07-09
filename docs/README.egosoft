@@ -67,15 +67,12 @@ Configurable via the in-game Extension Options menu.
 
 [size=125][u]Logbook settings[/u][/size]
 [list]
-[*] [b]Enable Logbook messages[/b]: when enabled, ships report each mining stage to the logbook:
-[/list]  heading to the target sector, scanning for resources, mining started, mining finished, and
-  cargo hold full. Off by default.
-
+[*] [b]Enable Logbook messages[/b]: when enabled, ships report each mining stage to the logbook: heading to the target sector, scanning for resources, mining started, mining finished, and cargo hold full. Off by default.
+[/list]
 [size=125][u]Debug Settings[/u][/size]
 [list]
-[*] [b]Enable debug logging[/b]: verbose script tracing for troubleshooting. Off by default, intended
-[/list]  for reporting issues rather than everyday use.
-
+[*] [b]Enable debug logging[/b]: verbose script tracing for troubleshooting. Off by default, intended for reporting issues rather than everyday use.
+[/list]
 [size=130][u]Video[/u][/size]
 
 [url=https://www.youtube.com/watch?v=hfOSsG4Q6Ck]Video demonstration of the Mining in Sector for Mimic Repeat Orders. Version 1.00[/url]
@@ -101,11 +98,9 @@ Not recommended to be in-person on ship while it is executing this order to mine
 [list]
 [*] Added
 [list]
-[*] New "Logbook settings" Extension Options section with an "Enable Logbook messages" toggle:
+[*] New "Logbook settings" Extension Options section with an "Enable Logbook messages" toggle: ships now report each mining stage (heading to sector, scanning for resources, mining started, mining finished, cargo hold full) to the logbook when enabled.
 [/list]
-[/list]    ships now report each mining stage (heading to sector, scanning for resources, mining started,
-    mining finished, cargo hold full) to the logbook when enabled.
-
+[/list]
 [size=125][u][2.00] - 2026-05-02[/u][/size]
 [list]
 [*] Added
