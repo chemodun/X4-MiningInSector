@@ -14,11 +14,10 @@ Simple mining routine for player owned ships in sector to be managed by Repeat O
 - Can't be initiated out of Repeat Orders.
 - Mod versions 1.xx are compatible only with game versions 7.60 and 8.00.
 - Mod versions 2.xx are compatible with game version 9.00 and upper.
-- Mod version 2.00 is available only on Nexus Mods, not on Steam Workshop (due to its limitation).
 
 ## Requirements
 
-- `X4: Foundations` 7.60 or newer (tested on 7.60 and 8.00).
+- `X4: Foundations` 7.60 or newer (tested on 7.60, 8.00 and 9.00).
 - `Mod Support APIs` by [SirNukes](https://next.nexusmods.com/profile/sirnukes?gameId=2659) to be installed and enabled. Version `1.93` and upper is required.
   - It is available via Steam - [SirNukes Mod Support APIs](https://steamcommunity.com/sharedfiles/filedetails/?id=2042901274)
   - Or via the Nexus Mods - [Mod Support APIs](https://www.nexusmods.com/x4foundations/mods/503)
