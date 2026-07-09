@@ -5,7 +5,6 @@ Simple mining routine for player owned ships in sector to be managed by Repeat O
 ## Features
 
 - Simple gathering of resources in the desired sector.
-- Can't be initiated out of Repeat Orders.
 - Mimic behavior is not mandatory, but `Mimic Repeat Orders` mod is required.
 
 ## Limitations
