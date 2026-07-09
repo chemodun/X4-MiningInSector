@@ -61,7 +61,7 @@ Configurable via the in-game Extension Options menu.
 
 ### Logbook settings
 
-- **Enable Logbook messages**: when enabled, ships report each mining stage to the logbook -
+- **Enable Logbook messages**: when enabled, ships report each mining stage to the logbook:
   heading to the target sector, scanning for resources, mining started, mining finished, and
   cargo hold full. Off by default.
 
