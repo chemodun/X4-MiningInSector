@@ -7,9 +7,23 @@
       <t id="2">Rutina de minería simple para naves propiedad del jugador en un sector, utilizada por {1001, 11267}</t>
       <t id="1001">En el Sector: %s</t>
       <t id="1002">Extrayendo %s en el Sector %s, gestionado por {1001, 11267}</t>
-      <!-- settings labels (90000+) -->
-      <t id="90001">Configuración general</t>
-      <t id="90002">Activar registro de depuración</t>
+      <!-- logbook messages (8000+) -->
+      <t id="8000">Info: rumbo al sector de minería</t>
+      <t id="8001">%1 \(%2\) se dirige al sector %3 para extraer %4.</t>
+      <t id="8002">Info: buscando recursos</t>
+      <t id="8003">%1 \(%2\) está escaneando el sector %3 en busca de %4.</t>
+      <t id="8004">Info: minería iniciada</t>
+      <t id="8005">%1 \(%2\) ha terminado de escanear el sector %3 y ahora está extrayendo %4.</t>
+      <t id="8006">Info: minería finalizada</t>
+      <t id="8007">%1 \(%2\) ha terminado de extraer %4 en el sector %3.</t>
+      <t id="8008">Info: bodega de carga llena</t>
+      <t id="8009">%1 \(%2\) ha detenido la extracción de %4 en el sector %3 - la bodega de carga está llena.</t>
+      <!-- Logbook settings labels (80000+) -->
+      <t id="80000">Configuración de la bitácora</t>
+      <t id="80001">Activar mensajes en la bitácora</t>
+      <!-- Debug settings labels (90000+) -->
+      <t id="90000">Configuración de depuración</t>
+      <t id="90001">Activar registro de depuración</t>
     </page>
   </add>
 </diff>

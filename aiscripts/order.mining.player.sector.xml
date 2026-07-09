@@ -76,11 +76,25 @@
         <do_if value="@this.assignedcontrolled.order.isrunning">
           <set_order_failed order="this.assignedcontrolled.order" text="{1045, 115}" comment="Not enough space in cargo hold." />
         </do_if>
+        <do_if value="@player.entity.$miningPlayerSectorConfig.$logbook">
+          <write_to_logbook category="general" title="{1972092409, 8008}"
+            text="{1972092409, 8009}.[this.assignedcontrolled.knownname, this.assignedcontrolled.idcode, $targetSector.knownname, $ware.name]"
+            interaction="showonmap" object="this.assignedcontrolled"
+            comment="%1 (%2) has stopped mining %4 in sector %3 - cargo hold is full." />
+        </do_if>
         <debug_text text="'MiningPlayerSector [%s]: Cargo hold is full. Aborting.'.[this.assignedcontrolled.debugname]" chance="$debugchance" filter="scripts" />
         <resume label="cleanup" />
       </do_if>
 
       <do_if value="this.sector != $targetSector">
+
+        <do_if
+          value="@player.entity.$miningPlayerSectorConfig.$logbook">
+          <write_to_logbook category="general" title="{1972092409, 8000}"
+            text="{1972092409, 8001}.[this.assignedcontrolled.knownname, this.assignedcontrolled.idcode, $targetSector.knownname, $ware.name]"
+            interaction="showonmap" object="this.assignedcontrolled"
+            comment="%1 (%2) is heading to sector %3 to mine %4." />
+        </do_if>
 
         <get_jump_path component="$jumpPath" multiple="true" uselocalhighways="true" refobject="this.assignedcontrolled"
           useknownpath="this.isplayerowned">
@@ -129,6 +143,14 @@
       <set_value name="$targetPos" exact="null" />
 
       <wait min="2s" max="5s" chance="0" />
+
+      <do_if
+        value="@player.entity.$miningPlayerSectorConfig.$logbook">
+        <write_to_logbook category="general" title="{1972092409, 8002}"
+          text="{1972092409, 8003}.[this.assignedcontrolled.knownname, this.assignedcontrolled.idcode, $targetSector.knownname, $ware.name]"
+          interaction="showonmap" object="this.assignedcontrolled"
+          comment="%1 (%2) is scanning sector %3 for %4." />
+      </do_if>
 
       <find_object name="$resourceProbes" class="class.resourceprobe" space="$targetSector" owner="faction.player" multiple="true" />
       <debug_text text="'MiningPlayerSector [%s]: found %s resource probe(s) in %s.'.[this.assignedcontrolled.debugname, $resourceProbes.count, $targetSector.knownname]" chance="$debugchance" filter="scripts" />
@@ -257,6 +279,13 @@
         </do_else>
         <remove_value name="$tmpSector" />
         <remove_value name="$tmpPos" />
+        <do_if
+          value="@player.entity.$miningPlayerSectorConfig.$logbook">
+          <write_to_logbook category="general" title="{1972092409, 8004}"
+            text="{1972092409, 8005}.[this.assignedcontrolled.knownname, this.assignedcontrolled.idcode, $targetSector.knownname, $ware.name]"
+            interaction="showonmap" object="this.assignedcontrolled"
+            comment="%1 (%2) has finished scanning sector %3 and is now mining %4." />
+        </do_if>
         <set_command command="command.mining" param="$targetSector" />
         <set_value name="$miningCollect" />
         <run_script name="'order.mining.collect.ship'" result="$collectResult">
@@ -283,6 +312,12 @@
       </do_else>
 
       <do_if value="$collectResult != 'aborted'">
+        <do_if value="@player.entity.$miningPlayerSectorConfig.$logbook">
+          <write_to_logbook category="general" title="{1972092409, 8006}"
+            text="{1972092409, 8007}.[this.assignedcontrolled.knownname, this.assignedcontrolled.idcode, $targetSector.knownname, $ware.name]"
+            interaction="showonmap" object="this.assignedcontrolled"
+            comment="%1 (%2) has finished mining %4 in sector %3." />
+        </do_if>
         <do_if value="$ware.hastag.liquid">
           <set_value name="$infomining" exact="{1015,24}" comment="Info: gas mining stopped" />
         </do_if>
@@ -314,12 +349,6 @@
               <param name="debugchance" value="$debugchance" />
             </run_script>
           </do_elseif>
-          <do_if value="this.shouldwarnplayer">
-            <write_to_logbook category="general" title="$infomining"
-              text="{1016, 93}.[this.assignedcontrolled.knownname, this.assignedcontrolled.idcode, $location.knownname]" interaction="showonmap"
-              object="this.assignedcontrolled" comment="%1 (%2) finished mining in sector %3." />
-            <wait chance="0" />
-          </do_if>
         </do_if>
       </do_if>
 

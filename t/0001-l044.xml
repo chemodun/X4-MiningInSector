@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- English -->
 <diff>
   <add sel="/language">
     <page id="1972092409" voice="no" title="MiningPlayerSector" descr="Text for MiningPlayerSector ai script">

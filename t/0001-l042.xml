@@ -7,9 +7,23 @@
       <t id="2">Jednoduchá těžební rutina pro lodě ve vlastnictví hráče v sektoru, používaná skriptem {1001, 11267}</t>
       <t id="1001">V Sektoru: %s</t>
       <t id="1002">Těžba %s v Sektoru %s, spravovaná {1001, 11267}</t>
-      <!-- settings labels (90000+) -->
-      <t id="90001">Obecná nastavení</t>
-      <t id="90002">Povolit protokolování ladění</t>
+      <!-- logbook messages (8000+) -->
+      <t id="8000">Info: směřuje do těžebního sektoru</t>
+      <t id="8001">%1 \(%2\) směřuje do sektoru %3, aby těžil %4.</t>
+      <t id="8002">Info: hledání zdrojů</t>
+      <t id="8003">%1 \(%2\) prohledává sektor %3 a hledá %4.</t>
+      <t id="8004">Info: těžba zahájena</t>
+      <t id="8005">%1 \(%2\) dokončil skenování sektoru %3 a nyní těží %4.</t>
+      <t id="8006">Info: těžba dokončena</t>
+      <t id="8007">%1 \(%2\) dokončil těžbu %4 v sektoru %3.</t>
+      <t id="8008">Info: nákladový prostor plný</t>
+      <t id="8009">%1 \(%2\) přestal těžit %4 v sektoru %3 - nákladový prostor je plný.</t>
+      <!-- Logbook settings labels (80000+) -->
+      <t id="80000">Nastavení deníku</t>
+      <t id="80001">Povolit zprávy v deníku</t>
+      <!-- Debug settings labels (90000+) -->
+      <t id="90000">Nastavení ladění</t>
+      <t id="90001">Povolit protokolování ladění</t>
     </page>
   </add>
 </diff>

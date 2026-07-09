@@ -7,9 +7,23 @@
       <t id="2">Prosta procedura wydobywcza dla statków należących do gracza w sektorze, używana przez {1001, 11267}</t>
       <t id="1001">W Sektorze: %s</t>
       <t id="1002">Wydobywanie %s w Sektorze %s, zarządzane przez {1001, 11267}</t>
-      <!-- settings labels (90000+) -->
-      <t id="90001">Ustawienia ogólne</t>
-      <t id="90002">Włącz rejestrowanie debugowania</t>
+      <!-- logbook messages (8000+) -->
+      <t id="8000">Info: w drodze do sektora wydobywczego</t>
+      <t id="8001">%1 \(%2\) zmierza do sektora %3, aby wydobywać %4.</t>
+      <t id="8002">Info: poszukiwanie zasobów</t>
+      <t id="8003">%1 \(%2\) skanuje sektor %3 w poszukiwaniu %4.</t>
+      <t id="8004">Info: rozpoczęto wydobycie</t>
+      <t id="8005">%1 \(%2\) zakończył skanowanie sektora %3 i teraz wydobywa %4.</t>
+      <t id="8006">Info: zakończono wydobycie</t>
+      <t id="8007">%1 \(%2\) zakończył wydobywanie %4 w sektorze %3.</t>
+      <t id="8008">Info: ładownia pełna</t>
+      <t id="8009">%1 \(%2\) przerwał wydobywanie %4 w sektorze %3 - ładownia jest pełna.</t>
+      <!-- Logbook settings labels (80000+) -->
+      <t id="80000">Ustawienia dziennika pokładowego</t>
+      <t id="80001">Włącz wpisy w dzienniku</t>
+      <!-- Debug settings labels (90000+) -->
+      <t id="90000">Ustawienia debugowania</t>
+      <t id="90001">Włącz rejestrowanie debugowania</t>
     </page>
   </add>
 </diff>

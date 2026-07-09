@@ -25,6 +25,9 @@ Simple mining routine for player owned ships in sector to be managed by Repeat O
 - `Mimic Repeat Orders` mod by [Chem O\`Dun](https://next.nexusmods.com/profile/ChemODun?gameId=2659) to be installed and enabled. Version `1.10` and upper is required.
   - It is available via Steam - [Mimic Repeat Orders](https://steamcommunity.com/sharedfiles/filedetails/?id=3599279973)
   - Or via the Nexus Mods - [Mimic Repeat Orders](https://www.nexusmods.com/x4foundations/mods/1875)
+- `Options Helper` mod by [Chem O\`Dun](https://next.nexusmods.com/profile/ChemODun?gameId=2659), to provide the in-game Extension Options menu. Version `1.00` and upper is required.
+  - It is available via Steam - [Options Helper](https://steamcommunity.com/sharedfiles/filedetails/?id=3715253556)
+  - Or via the Nexus Mods - [Options Helper](https://www.nexusmods.com/x4foundations/mods/2089)
 
 ## Installation
 
@@ -51,6 +54,23 @@ When you right-click on a sector in the map view, you will see the context menu 
 
 ![Mining Orders Example](docs/images/mining_orders_example.png)
 
+## Extension Options
+
+Configurable via the in-game Extension Options menu.
+
+![Extension Options](docs/images/options.png)
+
+### Logbook settings
+
+- **Enable Logbook messages**: when enabled, ships report each mining stage to the logbook -
+  heading to the target sector, scanning for resources, mining started, mining finished, and
+  cargo hold full. Off by default.
+
+### Debug Settings
+
+- **Enable debug logging**: verbose script tracing for troubleshooting. Off by default, intended
+  for reporting issues rather than everyday use.
+
 ## Video
 
 [Video demonstration of the Mining in Sector for Mimic Repeat Orders. Version 1.00](https://www.youtube.com/watch?v=hfOSsG4Q6Ck)
@@ -71,6 +91,13 @@ Not recommended to be in-person on ship while it is executing this order to mine
 - [Forleyor](https://next.nexusmods.com/profile/Forleyor?gameId=2659) — for his constant help with understanding the UI modding!
 
 ## Changelog
+
+### [2.01] - 2026-07-10
+
+- Added
+  - New "Logbook settings" Extension Options section with an "Enable Logbook messages" toggle:
+    ships now report each mining stage (heading to sector, scanning for resources, mining started,
+    mining finished, cargo hold full) to the logbook when enabled.
 
 ### [2.00] - 2026-05-02
 

@@ -7,9 +7,23 @@
       <t id="2">Einfache Bergbauroutine für spielereigene Schiffe im Sektor zur Verwendung durch {1001, 11267}</t>
       <t id="1001">Im Sektor: %s</t>
       <t id="1002">Abbau von %s im Sektor %s, verwaltet von {1001, 11267}</t>
-      <!-- settings labels (90000+) -->
-      <t id="90001">Allgemeine Einstellungen</t>
-      <t id="90002">Debug-Protokollierung aktivieren</t>
+      <!-- logbook messages (8000+) -->
+      <t id="8000">Info: Kurs auf Abbausektor</t>
+      <t id="8001">%1 \(%2\) ist unterwegs zum Sektor %3, um dort %4 abzubauen.</t>
+      <t id="8002">Info: Ressourcensuche</t>
+      <t id="8003">%1 \(%2\) durchsucht den Sektor %3 nach %4.</t>
+      <t id="8004">Info: Abbau gestartet</t>
+      <t id="8005">%1 \(%2\) hat den Scan des Sektors %3 abgeschlossen und baut nun %4 ab.</t>
+      <t id="8006">Info: Abbau beendet</t>
+      <t id="8007">%1 \(%2\) hat den Abbau von %4 im Sektor %3 beendet.</t>
+      <t id="8008">Info: Frachtraum voll</t>
+      <t id="8009">%1 \(%2\) hat den Abbau von %4 im Sektor %3 gestoppt - der Frachtraum ist voll.</t>
+      <!-- Logbook settings labels (80000+) -->
+      <t id="80000">Logbuch-Einstellungen</t>
+      <t id="80001">Logbucheinträge aktivieren</t>
+      <!-- Debug settings labels (90000+) -->
+      <t id="90000">Debug-Einstellungen</t>
+      <t id="90001">Debug-Protokollierung aktivieren</t>
     </page>
   </add>
 </diff>

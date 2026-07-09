@@ -7,9 +7,23 @@
       <t id="2">Rotina simples de mineração para naves pertencentes ao jogador no setor, utilizada por {1001, 11267}</t>
       <t id="1001">No Setor: %s</t>
       <t id="1002">Minerando %s no Setor %s, gerenciado por {1001, 11267}</t>
-      <!-- settings labels (90000+) -->
-      <t id="90001">Configurações gerais</t>
-      <t id="90002">Ativar registro de depuração</t>
+      <!-- logbook messages (8000+) -->
+      <t id="8000">Info: a caminho do setor de mineração</t>
+      <t id="8001">%1 \(%2\) está a caminho do setor %3 para minerar %4.</t>
+      <t id="8002">Info: buscando recursos</t>
+      <t id="8003">%1 \(%2\) está escaneando o setor %3 em busca de %4.</t>
+      <t id="8004">Info: mineração iniciada</t>
+      <t id="8005">%1 \(%2\) terminou de escanear o setor %3 e agora está minerando %4.</t>
+      <t id="8006">Info: mineração concluída</t>
+      <t id="8007">%1 \(%2\) terminou de minerar %4 no setor %3.</t>
+      <t id="8008">Info: porão de carga cheio</t>
+      <t id="8009">%1 \(%2\) parou de minerar %4 no setor %3 - o porão de carga está cheio.</t>
+      <!-- Logbook settings labels (80000+) -->
+      <t id="80000">Configurações do diário de bordo</t>
+      <t id="80001">Ativar mensagens no registro</t>
+      <!-- Debug settings labels (90000+) -->
+      <t id="90000">Configurações de depuração</t>
+      <t id="90001">Ativar registro de depuração</t>
     </page>
   </add>
 </diff>

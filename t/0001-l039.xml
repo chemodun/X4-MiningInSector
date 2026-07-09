@@ -7,9 +7,23 @@
       <t id="2">Routine di estrazione semplice per le navi di proprietà del giocatore nel settore da usare con {1001, 11267}</t>
       <t id="1001">Nel Settore: %s</t>
       <t id="1002">Estrazione di %s nel Settore %s, gestita da {1001, 11267}</t>
-      <!-- settings labels (90000+) -->
-      <t id="90001">Impostazioni generali</t>
-      <t id="90002">Abilita registrazione debug</t>
+      <!-- logbook messages (8000+) -->
+      <t id="8000">Info: rotta verso il settore minerario</t>
+      <t id="8001">%1 \(%2\) si sta dirigendo verso il settore %3 per estrarre %4.</t>
+      <t id="8002">Info: ricerca risorse</t>
+      <t id="8003">%1 \(%2\) sta scansionando il settore %3 in cerca di %4.</t>
+      <t id="8004">Info: estrazione iniziata</t>
+      <t id="8005">%1 \(%2\) ha terminato la scansione del settore %3 e ora sta estraendo %4.</t>
+      <t id="8006">Info: estrazione terminata</t>
+      <t id="8007">%1 \(%2\) ha terminato di estrarre %4 nel settore %3.</t>
+      <t id="8008">Info: stiva piena</t>
+      <t id="8009">%1 \(%2\) ha interrotto l'estrazione di %4 nel settore %3 - la stiva è piena.</t>
+      <!-- Logbook settings labels (80000+) -->
+      <t id="80000">Impostazioni registro di bordo</t>
+      <t id="80001">Abilita messaggi nel registro</t>
+      <!-- Debug settings labels (90000+) -->
+      <t id="90000">Impostazioni di debug</t>
+      <t id="90001">Abilita registrazione debug</t>
     </page>
   </add>
 </diff>

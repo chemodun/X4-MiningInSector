@@ -7,9 +7,23 @@
       <t id="2">Oyuncuya ait gemiler için sektörde kullanılan basit madencilik rutini; {1001, 11267} tarafından kullanılır</t>
       <t id="1001">Sektörde: %s</t>
       <t id="1002">%s madenciliği %s Sektöründe, {1001, 11267} tarafından yönetiliyor</t>
-      <!-- settings labels (90000+) -->
-      <t id="90001">Genel Ayarlar</t>
-      <t id="90002">Hata ayıklama günlüğünü etkinleştir</t>
+      <!-- logbook messages (8000+) -->
+      <t id="8000">Bilgi: madencilik sektörüne gidiliyor</t>
+      <t id="8001">%1 \(%2\), %4 madenciliği yapmak için %3 sektörüne gidiyor.</t>
+      <t id="8002">Bilgi: kaynak taranıyor</t>
+      <t id="8003">%1 \(%2\), %4 aramak için %3 sektörünü tarıyor.</t>
+      <t id="8004">Bilgi: madencilik başladı</t>
+      <t id="8005">%1 \(%2\), %3 sektörünü taramayı tamamladı ve şu anda %4 madenciliği yapıyor.</t>
+      <t id="8006">Bilgi: madencilik tamamlandı</t>
+      <t id="8007">%1 \(%2\), %3 sektöründe %4 madenciliğini tamamladı.</t>
+      <t id="8008">Bilgi: kargo ambarı dolu</t>
+      <t id="8009">%1 \(%2\), %3 sektöründe %4 madenciliğini durdurdu - kargo ambarı dolu.</t>
+      <!-- Logbook settings labels (80000+) -->
+      <t id="80000">Günlük ayarları</t>
+      <t id="80001">Günlük mesajlarını etkinleştir</t>
+      <!-- Debug settings labels (90000+) -->
+      <t id="90000">Hata Ayıklama Ayarları</t>
+      <t id="90001">Hata ayıklama günlüğünü etkinleştir</t>
     </page>
   </add>
 </diff>

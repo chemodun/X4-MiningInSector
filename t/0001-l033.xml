@@ -7,9 +7,23 @@
       <t id="2">Routine minière simple pour les vaisseaux appartenant au joueur dans un secteur, utilisée par {1001, 11267}</t>
       <t id="1001">Dans le Secteur : %s</t>
       <t id="1002">Extraction de %s dans le Secteur %s, gérée par {1001, 11267}</t>
-      <!-- settings labels (90000+) -->
-      <t id="90001">Paramètres généraux</t>
-      <t id="90002">Activer la journalisation de débogage</t>
+      <!-- logbook messages (8000+) -->
+      <t id="8000">Info : cap sur le secteur minier</t>
+      <t id="8001">%1 \(%2\) se dirige vers le secteur %3 pour extraire %4.</t>
+      <t id="8002">Info : recherche de ressources</t>
+      <t id="8003">%1 \(%2\) explore le secteur %3 à la recherche de %4.</t>
+      <t id="8004">Info : extraction commencée</t>
+      <t id="8005">%1 \(%2\) a terminé le scan du secteur %3 et extrait désormais %4.</t>
+      <t id="8006">Info : extraction terminée</t>
+      <t id="8007">%1 \(%2\) a terminé l'extraction de %4 dans le secteur %3.</t>
+      <t id="8008">Info : soute pleine</t>
+      <t id="8009">%1 \(%2\) a arrêté l'extraction de %4 dans le secteur %3 - la soute est pleine.</t>
+      <!-- Logbook settings labels (80000+) -->
+      <t id="80000">Paramètres du journal de bord</t>
+      <t id="80001">Activer les messages du journal</t>
+      <!-- Debug settings labels (90000+) -->
+      <t id="90000">Paramètres de débogage</t>
+      <t id="90001">Activer la journalisation de débogage</t>
     </page>
   </add>
 </diff>
