@@ -21,10 +21,10 @@ Simple mining routine for player owned ships in sector to be managed by Repeat O
 - `Mod Support APIs` by [SirNukes](https://next.nexusmods.com/profile/sirnukes?gameId=2659) to be installed and enabled. Version `1.93` and upper is required.
   - It is available via Steam - [SirNukes Mod Support APIs](https://steamcommunity.com/sharedfiles/filedetails/?id=2042901274)
   - Or via the Nexus Mods - [Mod Support APIs](https://www.nexusmods.com/x4foundations/mods/503)
-- `Mimic Repeat Orders` mod by [Chem O\`Dun](https://next.nexusmods.com/profile/ChemODun?gameId=2659) to be installed and enabled. Version `1.10` and upper is required.
+- `Mimic Repeat Orders` mod by [Chem O`Dun](https://next.nexusmods.com/profile/ChemODun?gameId=2659) to be installed and enabled. Version `1.10` and upper is required.
   - It is available via Steam - [Mimic Repeat Orders](https://steamcommunity.com/sharedfiles/filedetails/?id=3599279973)
   - Or via the Nexus Mods - [Mimic Repeat Orders](https://www.nexusmods.com/x4foundations/mods/1875)
-- `Options Helper` mod by [Chem O\`Dun](https://next.nexusmods.com/profile/ChemODun?gameId=2659), to provide the in-game Extension Options menu. Version `1.00` and upper is required.
+- `Options Helper` mod by [Chem O`Dun](https://next.nexusmods.com/profile/ChemODun?gameId=2659), to provide the in-game Extension Options menu. Version `1.00` and upper is required.
   - It is available via Steam - [Options Helper](https://steamcommunity.com/sharedfiles/filedetails/?id=3715253556)
   - Or via the Nexus Mods - [Options Helper](https://www.nexusmods.com/x4foundations/mods/2089)
 
